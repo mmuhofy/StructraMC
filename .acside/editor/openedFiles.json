@@ -1,0 +1,125 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/AndroidStudio/Structra-Mc/gradle.properties",
+      "selection": {
+        "end": {
+          "column": 27,
+          "index": 849,
+          "line": 28
+        },
+        "start": {
+          "column": 27,
+          "index": 849,
+          "line": 28
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidStudio/Structra-Mc/settings.gradle.kts",
+      "selection": {
+        "end": {
+          "column": 29,
+          "index": 351,
+          "line": 13
+        },
+        "start": {
+          "column": 29,
+          "index": 351,
+          "line": 13
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidStudio/Structra-Mc/build.gradle.kts",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 3242,
+          "line": 86
+        },
+        "start": {
+          "column": 1,
+          "index": 3242,
+          "line": 86
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidStudio/Structra-Mc/gradle/wrapper/gradle-wrapper.properties",
+      "selection": {
+        "end": {
+          "column": 26,
+          "index": 323,
+          "line": 7
+        },
+        "start": {
+          "column": 26,
+          "index": 323,
+          "line": 7
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidStudio/Structra-Mc/src/main/resources/fabric.mod.json",
+      "selection": {
+        "end": {
+          "column": 54,
+          "index": 335,
+          "line": 10
+        },
+        "start": {
+          "column": 54,
+          "index": 335,
+          "line": 10
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidStudio/Structra-Mc/src/main/resources/structra.mixins.json",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 161,
+          "line": 8
+        },
+        "start": {
+          "column": 1,
+          "index": 161,
+          "line": 8
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidStudio/Structra-Mc/src/main/kotlin/com/muhofy/structra/StructraClient.kt",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 715,
+          "line": 23
+        },
+        "start": {
+          "column": 1,
+          "index": 715,
+          "line": 23
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidStudio/Structra-Mc/src/main/kotlin/com/muhofy/structra/util/ModConstants.kt",
+      "selection": {
+        "end": {
+          "column": 1,
+          "index": 1946,
+          "line": 56
+        },
+        "start": {
+          "column": 1,
+          "index": 1946,
+          "line": 56
+        }
+      }
+    }
+  ],
+  "selectedFile": "/storage/emulated/0/AndroidStudio/Structra-Mc/settings.gradle.kts"
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "structra",
+  "version": "${version}",
+  "name": "Structra",
+  "description": "AI-powered 3D structure generator for Minecraft. Generate, preview and place structures using natural language prompts.",
+  "authors": [
+    "Muhofy"
+  ],
+  "contact": {
+    "sources": "https://github.com/mmuhofy/structra-mc"
+  },
+  "license": "MIT",
+  "icon": "assets/structra/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "com.muhofy.structra.StructraClient"
+      }
+    ]
+  },
+  "mixins": [
+    "structra.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "~${minecraft_version}",
+    "java": ">=21",
+    "fabric-api": "*",
+    "fabric-language-kotlin": ">=${fabric_language_kotlin_version}"
+  },
+  "suggests": {}
+}
