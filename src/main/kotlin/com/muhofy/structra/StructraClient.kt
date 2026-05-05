@@ -1,6 +1,7 @@
 package com.muhofy.structra
 
 import com.mojang.blaze3d.platform.InputConstants
+import com.muhofy.structra.config.ConfigManager
 import com.muhofy.structra.ui.StructraScreen
 import com.muhofy.structra.util.ModConstants
 import net.fabricmc.api.ClientModInitializer
@@ -32,7 +33,7 @@ object StructraClient : ClientModInitializer {
 
         registerKeybinds()
 
-        // Phase 1: ConfigManager.init()
+        ConfigManager.init()
         // Phase 2: BlockRegistry.init()
 
         LOGGER.info("Structra initialized.")
