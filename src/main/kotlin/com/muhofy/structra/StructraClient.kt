@@ -2,6 +2,7 @@ package com.muhofy.structra
 
 import com.mojang.blaze3d.platform.InputConstants
 import com.muhofy.structra.config.ConfigManager
+import com.muhofy.structra.ui.SetupScreen
 import com.muhofy.structra.ui.StructraScreen
 import com.muhofy.structra.util.ModConstants
 import net.fabricmc.api.ClientModInitializer
@@ -54,10 +55,11 @@ object StructraClient : ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register { client ->
             while (openScreenKey.consumeClick()) {
-                if (client.screen is StructraScreen) {
-                    Minecraft.getInstance().setScreen(null)
-                } else {
-                    Minecraft.getInstance().setScreen(StructraScreen())
+                when {
+                    client.screen is StructraScreen -> Minecraft.getInstance().setScreen(null)
+                    client.screen is SetupScreen -> Minecraft.getInstance().setScreen(null)
+                    ConfigManager.isFirstLaunch() -> Minecraft.getInstance().setScreen(SetupScreen())
+                    else -> Minecraft.getInstance().setScreen(StructraScreen())
                 }
             }
         }
