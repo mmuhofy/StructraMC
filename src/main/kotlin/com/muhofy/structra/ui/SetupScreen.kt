@@ -11,6 +11,8 @@ import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.components.EditBox
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.Component
+import net.minecraft.network.chat.Style
+import net.minecraft.util.FormattedCharSequence
 
 // CLIENT-SIDE ONLY
 // Setup screen shown on first launch (no API key stored)
@@ -135,9 +137,10 @@ class SetupScreen(private val previousScreen: Screen? = null) : Screen(
         ).also {
             it.setMaxLength(256)
             it.value = ""
-            // Mask input — show dots
-            it.setFormatter { text, _ ->
-                Component.literal("•".repeat(text.length))
+            // Mask input — show dots instead of actual key characters
+            // addFormatter confirmed from MC 1.21.11 source (mcsrc.dev)
+            it.addFormatter { text, _ ->
+                FormattedCharSequence.forward("•".repeat(text.length), Style.EMPTY)
             }
         }
         apiKeyInput = box
