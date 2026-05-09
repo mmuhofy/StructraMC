@@ -1,6 +1,7 @@
 package com.muhofy.structra
 
 import com.mojang.blaze3d.platform.InputConstants
+import com.muhofy.structra.world.GhostRenderer
 import com.muhofy.structra.block.BlockRegistry
 import com.muhofy.structra.config.ConfigManager
 import com.muhofy.structra.ui.SetupScreen
@@ -37,6 +38,7 @@ object StructraClient : ClientModInitializer {
 
         ConfigManager.init()
         BlockRegistry.init()
+        GhostRenderer.register()
 
         LOGGER.info("Structra initialized.")
     }
