@@ -1,0 +1,63 @@
+name: Build Structra
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Cache Fabric Loom
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches/fabric-loom
+          key: ${{ runner.os }}-loom-${{ hashFiles('gradle.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-loom-
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build mod
+        run: ./gradlew build --stacktrace
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        if: success()
+        with:
+          name: structra-build
+          path: build/libs/*.jar
+          retention-days: 7
+
+      - name: Upload build reports on failure
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: build-reports
+          path: build/reports/
+          retention-days: 3
