@@ -166,23 +166,24 @@ object GhostRenderer {
     }
 
     private fun upload(drawParams: MeshData.DrawState, format: VertexFormat, builtBuffer: MeshData): GpuBuffer {
-        val size = drawParams.vertexCount() * format.vertexSize
+        val size = (drawParams.vertexCount() * format.vertexSize).toLong()
 
         if (vertexBuffer == null || vertexBuffer!!.size() < size) {
             vertexBuffer?.close()
                             vertexBuffer = MappableRingBuffer(
                 { "${ModConstants.MOD_ID} ghost render pipeline" },
-                (GpuBuffer.USAGE_VERTEX or GpuBuffer.USAGE_MAP_WRITE).toInt(),
+                GpuBuffer.USAGE_VERTEX or GpuBuffer.USAGE_MAP_WRITE,
                 size
             )
         }
 
         val encoder: CommandEncoder = RenderSystem.getDevice().createCommandEncoder()
+        val vertexBuf = checkNotNull(builtBuffer.vertexBuffer()) { "MeshData.vertexBuffer() returned null" }
         encoder.mapBuffer(
-            vertexBuffer!!.currentBuffer().slice(0, builtBuffer.vertexBuffer()!!.remaining()),
+            vertexBuffer!!.currentBuffer().slice(0, vertexBuf.remaining()),
             false, true
         ).use { mapped ->
-            MemoryUtil.memCopy(builtBuffer.vertexBuffer()!!, mapped.data())
+            MemoryUtil.memCopy(vertexBuf, mapped.data())
         }
 
         return vertexBuffer!!.currentBuffer()
