@@ -6,6 +6,9 @@ import com.muhofy.structra.api.GeminiService
 import com.muhofy.structra.api.PromptRequest
 import com.muhofy.structra.api.StructureData
 import com.muhofy.structra.config.ConfigManager
+import com.muhofy.structra.export.ProjectSerializer
+import com.muhofy.structra.export.StructraProject
+import com.muhofy.structra.export.StructraVersion
 import com.muhofy.structra.util.ModConstants
 import com.muhofy.structra.world.GhostState
 import com.muhofy.structra.world.WorldPlacer
@@ -34,10 +37,10 @@ class StructraScreen : Screen(Component.translatable("structra.screen.title")) {
     private var scrollOffset = 0
     private var activeStructure: StructureData? = null
 
+    private var currentProject: StructraProject = ProjectSerializer.newProject("New Structure")
     private val aiProvider: AiProvider = GeminiService
-    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
-    // Suggestion chips
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
     private val suggestions = listOf(
         "structra.suggestion.roof",
         "structra.suggestion.enlarge",
@@ -338,6 +341,20 @@ class StructraScreen : Screen(Component.translatable("structra.screen.title")) {
         entry.confirmed = true
         WorldPlacer.place(structure)
         GhostState.deactivate()
+
+        // Auto-save on confirmation
+        val version = StructraVersion(
+            versionNumber = entry.version,
+            prompt = history.lastOrNull { it.role == "user" }?.text ?: "",
+            structure = structure
+        )
+        currentProject = currentProject.copy(
+            versions = currentProject.versions + version,
+            promptHistory = history.toList(),
+            lastModified = System.currentTimeMillis()
+        )
+        ProjectSerializer.save(currentProject)
+
         buildWidgets()
     }
 
