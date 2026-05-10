@@ -170,19 +170,19 @@ object GhostRenderer {
 
         if (vertexBuffer == null || vertexBuffer!!.size() < size) {
             vertexBuffer?.close()
-            vertexBuffer = MappableRingBuffer(
+                            vertexBuffer = MappableRingBuffer(
                 { "${ModConstants.MOD_ID} ghost render pipeline" },
-                GpuBuffer.USAGE_VERTEX or GpuBuffer.USAGE_MAP_WRITE,
+                (GpuBuffer.USAGE_VERTEX or GpuBuffer.USAGE_MAP_WRITE).toInt(),
                 size
             )
         }
 
         val encoder: CommandEncoder = RenderSystem.getDevice().createCommandEncoder()
         encoder.mapBuffer(
-            vertexBuffer!!.currentBuffer().slice(0, builtBuffer.vertexBuffer().remaining()),
+            vertexBuffer!!.currentBuffer().slice(0, builtBuffer.vertexBuffer()!!.remaining()),
             false, true
         ).use { mapped ->
-            MemoryUtil.memCopy(builtBuffer.vertexBuffer(), mapped.data())
+            MemoryUtil.memCopy(builtBuffer.vertexBuffer()!!, mapped.data())
         }
 
         return vertexBuffer!!.currentBuffer()
@@ -208,9 +208,9 @@ object GhostRenderer {
         RenderSystem.getDevice().createCommandEncoder()
             .createRenderPass(
                 { "${ModConstants.MOD_ID} ghost rendering" },
-                client.mainRenderTarget.colorTextureView,
+                client.mainRenderTarget.colorTextureView!!,
                 OptionalInt.empty(),
-                client.mainRenderTarget.depthTextureView,
+                client.mainRenderTarget.depthTextureView!!,
                 OptionalDouble.empty()
             ).use { pass ->
                 pass.setPipeline(GHOST_PIPELINE)
