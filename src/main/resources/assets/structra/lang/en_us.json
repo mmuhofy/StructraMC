@@ -2,21 +2,19 @@
   "key.structra.open_screen": "Open Structra",
   "key.categories.structra": "Structra",
 
-  "structra.setup.title": "Structra Setup",
+  "structra.screen.title": "Structra",
 
+  "structra.setup.title": "Structra Setup",
   "structra.setup.welcome.title": "Welcome to Structra",
   "structra.setup.welcome.desc": "Generate and place AI-powered structures in your world.",
   "structra.setup.welcome.next": "Get Started →",
-
   "structra.setup.provider.title": "Choose AI Provider",
   "structra.setup.provider.desc": "Select the AI service you want to use.",
   "structra.setup.provider.next": "Continue →",
-
   "structra.setup.apikey.title": "Enter API Key",
   "structra.setup.apikey.desc": "Enter your %s API key below.",
   "structra.setup.apikey.placeholder": "Paste your API key here...",
   "structra.setup.apikey.next": "Continue →",
-
   "structra.setup.test.title": "Test Connection",
   "structra.setup.test.desc": "Verify your API key works before continuing.",
   "structra.setup.test.button": "Test Connection",
@@ -24,10 +22,25 @@
   "structra.setup.test.running": "Testing...",
   "structra.setup.test.success": "✔ Connection successful!",
   "structra.setup.test.fail": "✘ Connection failed. Check your key.",
-
   "structra.setup.done.title": "All Set!",
   "structra.setup.done.desc": "Structra is ready. Press Y anytime to open.",
   "structra.setup.done.button": "Start Building →",
+  "structra.setup.back": "← Back",
 
-  "structra.setup.back": "← Back"
+  "structra.chat.placeholder": "What should we build?",
+  "structra.chat.confirm": "✅ Confirm",
+  "structra.chat.cancel": "❌ Cancel",
+
+  "structra.suggestion.roof": "Add roof",
+  "structra.suggestion.enlarge": "Enlarge",
+  "structra.suggestion.shrink": "Shrink",
+  "structra.suggestion.window": "Add windows",
+  "structra.suggestion.second_floor": "Add second floor",
+
+  "structra.preview.label": "3D Preview",
+  "structra.ghost.active": "👻 Ghost active",
+
+  "structra.status.generating": "Generating...",
+  "structra.status.ghost_active": "Ghost active — G to place, ESC to cancel",
+  "structra.status.idle": "V%s active"
 }
