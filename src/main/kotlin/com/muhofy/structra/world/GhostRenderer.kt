@@ -166,7 +166,7 @@ object GhostRenderer {
     }
 
     private fun upload(drawParams: MeshData.DrawState, format: VertexFormat, builtBuffer: MeshData): GpuBuffer {
-        val size = (drawParams.vertexCount() * format.vertexSize).toLong()
+        val size = drawParams.vertexCount() * format.vertexSize
 
         if (vertexBuffer == null || vertexBuffer!!.size() < size) {
             vertexBuffer?.close()
@@ -178,9 +178,9 @@ object GhostRenderer {
         }
 
         val encoder: CommandEncoder = RenderSystem.getDevice().createCommandEncoder()
-        val vertexBuf = checkNotNull(builtBuffer.vertexBuffer()) { "MeshData.vertexBuffer() returned null" }
+        val vertexBuf = builtBuffer.vertexBuffer()!!
         encoder.mapBuffer(
-            vertexBuffer!!.currentBuffer().slice(0, vertexBuf.remaining()),
+            vertexBuffer!!.currentBuffer().slice(0, vertexBuf.remaining().toLong()),
             false, true
         ).use { mapped ->
             MemoryUtil.memCopy(vertexBuf, mapped.data())
