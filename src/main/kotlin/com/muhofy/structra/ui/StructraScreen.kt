@@ -160,7 +160,6 @@ class StructraScreen : Screen(Component.translatable("structra.screen.title")) {
 
     // --- Rendering ---
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int, delta: Float) {
-        renderBackground(graphics, mouseX, mouseY, delta)
         renderChatPanel(graphics)
         renderRightPanel(graphics)
         renderStatusBar(graphics)
