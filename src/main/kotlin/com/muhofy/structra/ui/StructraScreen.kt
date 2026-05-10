@@ -89,7 +89,6 @@ class StructraScreen : Screen(Component.translatable("structra.screen.title")) {
             Component.translatable("structra.chat.placeholder")
         ).also {
             it.setMaxLength(512)
-            it.hint = Component.translatable("structra.chat.placeholder")
         }
         promptInput = input
         addRenderableWidget(input)
