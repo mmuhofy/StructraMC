@@ -54,18 +54,17 @@ object ProjectSerializer {
     fun listAll(): List<StructraProject> {
         return try {
             Files.createDirectories(projectsDir)
-            Files.list(projectsDir)
+            val files = Files.list(projectsDir).toList()
                 .filter { it.toString().endsWith(ModConstants.PROJECT_FILE_EXTENSION) }
-                .mapNotNull { file ->
-                    try {
-                        json.decodeFromString<StructraProject>(Files.readString(file))
-                    } catch (e: Exception) {
-                        StructraClient.LOGGER.warn("Skipping corrupt project file: ${file.fileName}")
-                        null
-                    }
+
+            files.mapNotNull { file ->
+                try {
+                    json.decodeFromString<StructraProject>(Files.readString(file))
+                } catch (e: Exception) {
+                    StructraClient.LOGGER.warn("Skipping corrupt project file: ${file.fileName}")
+                    null
                 }
-                .toList()
-                .sortedByDescending { it.lastModified }
+            }.sortedByDescending { it.lastModified }
         } catch (e: Exception) {
             StructraClient.LOGGER.error("Failed to list projects: ${e.message}")
             emptyList()
