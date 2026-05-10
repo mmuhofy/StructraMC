@@ -88,9 +88,8 @@ object WorldPlacer {
     private fun buildPaletteMap(palette: Map<Int, String>): Map<Int, BlockState> {
         return palette.mapValues { (_, id) ->
             val identifier = Identifier.tryParse(id)
-            if (identifier != null) {
-                BuiltInRegistries.BLOCK.get(identifier)?.defaultBlockState()
-                    ?: fallbackState()
+            if (identifier != null && BuiltInRegistries.BLOCK.containsKey(identifier)) {
+                BuiltInRegistries.BLOCK.getValue(identifier).defaultBlockState()
             } else {
                 fallbackState()
             }
@@ -98,9 +97,9 @@ object WorldPlacer {
     }
 
     private fun fallbackState(): BlockState =
-        BuiltInRegistries.BLOCK.get(
+        BuiltInRegistries.BLOCK.getValue(
             Identifier.parse(ModConstants.FALLBACK_BLOCK_ID)
-        )!!.defaultBlockState()
+        ).defaultBlockState()
 
     private fun applyRotation(x: Int, z: Int, sizeX: Int, sizeZ: Int, rotation: Int): Pair<Int, Int> {
         return when (rotation) {

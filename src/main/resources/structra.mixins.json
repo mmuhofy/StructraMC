@@ -2,7 +2,7 @@
   "required": true,
   "package": "com.muhofy.structra.mixin",
   "compatibilityLevel": "JAVA_21",
-  "client": [],
+  "client": ["GameRendererMixin"],
   "injectors": {
     "defaultRequire": 1
   }
